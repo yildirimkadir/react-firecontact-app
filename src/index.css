@@ -13,6 +13,28 @@ code {
 } */
 @import url('https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Foundation&display=swap');
 
-body {
+* {
   font-family: 'Edu NSW ACT Foundation', cursive;
+}
+
+.register {
+  margin-top: 8rem;
+}
+.contact {
+  margin-top: 5rem;
+}
+.register-head {
+  /* background-color: lightgray; */
+  /* border: 3px solid black; */
+  width: 100%;
+  text-align: center;
+}
+span {
+  height: 100%;
+}
+.form-control {
+  width: 100%;
+}
+.delete, .edit {
+  cursor: pointer;
 }
