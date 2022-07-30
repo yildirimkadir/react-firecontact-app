@@ -1,12 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaUserAlt } from "react-icons/fa";
 import { BsTelephoneFill } from "react-icons/bs";
 
 const Register = () => {
+  const [userName, setUserName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [select, setSelect] = useState("");
+  const [list, setList] = useState([]);
+
+  const handleClick = () => {
+    if (!userName || !phone || !select) {
+      return alert("Bitte richtig ausfüllen ");
+    }
+
+    const newContact = {
+      id: Math.floor(Math.random() * 1000),
+      userName: userName,
+      phone: phone,
+      gender: select,
+    };
+
+    setList((oldlist) => [...oldlist, newContact]);
+    console.log(list);
+    setUserName("");
+    setPhone("");
+    setSelect("");
+  };
+
   return (
     <div className="register d-flex flex-column justify-content-center align-items-center">
       <div className="register-head mb-1">
-        <h1 className="mb-4 text-success">Register</h1>
+        <h1 className="mb-2 text-success">Register</h1>
       </div>
       <div className="input-group mb-3">
         <div className="input-group-prepend">
@@ -20,6 +44,8 @@ const Register = () => {
           placeholder="Username"
           aria-label="Username"
           aria-describedby="basic-addon1"
+          value={userName}
+          onChange={(e) => setUserName(e.target.value)}
         />
       </div>
       <div className="input-group mb-3">
@@ -32,25 +58,33 @@ const Register = () => {
           type="text"
           className="form-control outline-none"
           placeholder="Phone"
-          aria-label="Username"
+          aria-label="Phone"
           aria-describedby="basic-addon1"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
         />
       </div>
       <div className="input-group">
         <select
           className="custom-select w-100 p-2 mb-3"
           id="inputGroupSelect04"
+          value={select}
+          onChange={(e) => setSelect(e.target.value)}
         >
-          <option value="1">male</option>
-          <option value="2">female</option>
-          <option value="3">other</option>
+          <option value="">Gender</option>
+          <option value="male">male</option>
+          <option value="female">female</option>
+          <option value="other">other</option>
         </select>
       </div>
-      <input
-        type="submit"
+      <button
+        type="button"
         className="btn btn-success form-control"
         value="Register"
-      />
+        onClick={handleClick}
+      >
+        Register
+      </button>
     </div>
   );
 };
