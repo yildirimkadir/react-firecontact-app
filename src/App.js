@@ -4,9 +4,8 @@ import Register from './components/Register';
 
 function App() {
   return (
-    <div className="container d-flex justify-content-evenly align-items-center flex-wrap">
+    <div className="capsul">
       <Register />
-      <Contact />
     </div>
   );
 }

@@ -2,32 +2,37 @@ import React from "react";
 import { RiDeleteBack2Fill } from "react-icons/ri";
 import { FaUserEdit } from "react-icons/fa";
 
-const Contact = () => {
+const Contact = ({ list, setList }) => {
   return (
-    <div className=" contact d-flex flex-column justify-content-center align-items-center">
+    <div className=" contact">
       <h1 className="text-success">Contact List</h1>
-      <table className="table table-lg">
+      <table className="table-contact table">
         <thead className="">
           <tr>
-            <th scope="col-4">Username</th>
-            <th scope="col-4">Phone Number</th>
-            <th scope="col-2">Gender</th>
-            <th scope="col">Delete</th>
-            <th scope="col">Edit</th>
+            <th scope="row">Username</th>
+            <th>Phone</th>
+            <th>Gender</th>
+            <th>Delete</th>
+            <th>Edit</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Kadir Yildirim</td>
-            <td>01775953065</td>
-            <td>Male</td>
-            <td className="delete">
-              <RiDeleteBack2Fill />
-            </td>
-            <td className="edit">
-              <FaUserEdit />
-            </td>
-          </tr>
+          {list?.map((item) => {
+            const { id, userName, phone, gender } = item;
+            return (
+              <tr>
+                <td scope="row">{userName}</td>
+                <td>{phone}</td>
+                <td>{gender}</td>
+                <td className="delete">
+                  <RiDeleteBack2Fill />
+                </td>
+                <td scope="col-1" className="edit">
+                  <FaUserEdit />
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>
