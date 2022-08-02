@@ -19,7 +19,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-export const AddUser = (list)=> {
+export const addUser = (list)=> {
     const db = getDatabase(app);
     const userRef = ref(db, "users/");
     const newUserRef = push(userRef);
@@ -57,7 +57,7 @@ export const deleteUser=(id)=>{
     remove(ref(db,"users/"+id));
 }
 
-export const UpdateUser=(list)=>{
+export const updateUser=(list)=>{
     const db = getDatabase(app);
     const updates={}
     updates["users/"+list.id]=list

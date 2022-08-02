@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { RiDeleteBack2Fill } from "react-icons/ri";
 import { FaUserEdit } from "react-icons/fa";
-import { useFetch } from "../utils/firebase";
+import { useFetch, deleteUser } from "../utils/firebase";
 
-const Contact = () => {
+const Contact = ({ editUser }) => {
   const { isLoading, contactList } = useFetch();
   return (
     <div className=" contact">
