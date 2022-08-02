@@ -19,7 +19,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-export const addUser = (list)=> {
+export const AddUser = (list)=> {
     const db = getDatabase(app);
     const userRef = ref(db, "users/");
     const newUserRef = push(userRef);
@@ -52,12 +52,12 @@ export const useFetch=()=>{
     return {isLoading,contactList}
 }
 
-export const deleteUser=(id)=>{
+export const DeleteUser=(id)=>{
     const db = getDatabase(app);
     remove(ref(db,"users/"+id));
 }
 
-export const updateUser=(list)=>{
+export const UpdateUser=(list)=>{
     const db = getDatabase(app);
     const updates={}
     updates["users/"+list.id]=list

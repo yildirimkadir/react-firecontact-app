@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { RiDeleteBack2Fill } from "react-icons/ri";
 import { FaUserEdit } from "react-icons/fa";
-import { useFetch, deleteUser } from "../utils/firebase";
+import { useFetch, DeleteUser } from "../utils/firebase";
 
 const Contact = ({ editUser }) => {
   const { isLoading, contactList } = useFetch();
@@ -33,7 +33,7 @@ const Contact = ({ editUser }) => {
                 <td scope="row">{item.username.toUpperCase()}</td>
                 <td>{item.phone}</td>
                 <td>{item.gender}</td>
-                <td className="delete" onClick={deleteUser(item.id)}>
+                <td className="delete" onClick={DeleteUser(item.id)}>
                   <RiDeleteBack2Fill />
                 </td>
                 <td

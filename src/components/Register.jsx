@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FaUserAlt } from "react-icons/fa";
 import { BsTelephoneFill } from "react-icons/bs";
 import Contact from "./Contact";
-import { addUser, updateUser } from "../utils/firebase";
+import { AddUser, UpdateUser } from "../utils/firebase";
 
 const initialValues = { userName: "", phone: "", gender: "NO INFO" };
 
@@ -11,16 +11,24 @@ const Register = () => {
   //   const [phone, setPhone] = useState("");
   //   const [select, setSelect] = useState("");
   const [list, setList] = useState(initialValues);
+  const [isAdd, setIsAdd] = useState("Register");
   //   const [show, setShow] = useState(true);
 
   const handleClick = () => {
-    if (list.id) {
-      updateUser(list);
-    } else {
-      addUser(list);
-    }
+    AddUser(list);
+    // if (list.id) {
+    //   UpdateUser(list);
+    // } else {
+
+    // }
 
     setList(initialValues);
+    setIsAdd("Register");
+  };
+
+  const editUser = (id, username, phone, gender) => {
+    setIsAdd("UPDATE");
+    setList({ id, username, phone, gender });
   };
 
   const handleChange = (e) => {
@@ -88,11 +96,11 @@ const Register = () => {
           value="Register"
           onClick={handleClick}
         >
-          Register
+          {isAdd}
         </button>
       </div>
       <div>
-        <Contact list={list} setList={setList} />
+        <Contact list={list} setList={setList} editUser={editUser} />
       </div>
     </div>
   );
