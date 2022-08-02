@@ -2,33 +2,26 @@ import React, { useState } from "react";
 import { FaUserAlt } from "react-icons/fa";
 import { BsTelephoneFill } from "react-icons/bs";
 import Contact from "./Contact";
+import { AddUser } from "../utils/firebase";
+
+const initialValues = { userName: "", phone: "", gender: "NO INFO" };
 
 const Register = () => {
-  const [userName, setUserName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [select, setSelect] = useState("");
-  const [list, setList] = useState([]);
+  //   const [userName, setUserName] = useState("");
+  //   const [phone, setPhone] = useState("");
+  //   const [select, setSelect] = useState("");
+  const [list, setList] = useState(initialValues);
   //   const [show, setShow] = useState(true);
 
   const handleClick = () => {
-    if (!userName || !phone || !select) {
-      return alert("Bitte richtig ausfüllen ");
-    }
-
-    const newContact = {
-      id: Math.floor(Math.random() * 1000),
-      userName: userName,
-      phone: phone,
-      gender: select,
-    };
-
-    setList((oldlist) => [...oldlist, newContact]);
-    console.log(list);
-    setUserName("");
-    setPhone("");
-    setSelect("");
+    AddUser(list);
   };
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setList({ ...list, [name]: value });
+  };
+  console.log(list);
   return (
     <div className="container-fluid d-flex justify-content-center gap-5 align-items-center flex-wrap">
       <div className="register d-flex flex-column justify-content-center align-items-center">
@@ -47,8 +40,9 @@ const Register = () => {
             placeholder="Username"
             aria-label="Username"
             aria-describedby="basic-addon1"
-            value={userName}
-            onChange={(e) => setUserName(e.target.value)}
+            name="userName"
+            value={list.userName}
+            onChange={handleChange}
           />
         </div>
         <div className="input-group mb-3">
@@ -63,16 +57,18 @@ const Register = () => {
             placeholder="Phone"
             aria-label="Phone"
             aria-describedby="basic-addon1"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
+            name="phone"
+            value={list.phone}
+            onChange={handleChange}
           />
         </div>
         <div className="input-group">
           <select
             className="custom-select w-100 p-2 mb-3"
             id="inputGroupSelect04"
-            value={select}
-            onChange={(e) => setSelect(e.target.value)}
+            name="gender"
+            value={list.gender}
+            onChange={handleChange}
           >
             <option value="">Gender</option>
             <option value="male">male</option>

@@ -1,5 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+import { getDatabase, ref, push, set } from "firebase/database";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -16,3 +17,17 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+
+export const AddUser = (list)=> {
+    const db = getDatabase(app);
+    const userRef = ref(db, "users/");
+    const newUserRef = push(userRef);
+    set(newUserRef, {
+    username: list.userName,
+    phone: list.phone,
+    gender: list.gender
+   
+});
+
+}
+

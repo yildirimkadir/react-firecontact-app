@@ -17,7 +17,7 @@ const Contact = ({ list, setList }) => {
           </tr>
         </thead>
         <tbody>
-          {list?.map((item) => {
+          {/* {list?.map((item) => {
             const { id, userName, phone, gender } = item;
             return (
               <tr>
@@ -32,7 +32,7 @@ const Contact = ({ list, setList }) => {
                 </td>
               </tr>
             );
-          })}
+          })} */}
         </tbody>
       </table>
     </div>
