@@ -15,6 +15,7 @@ const Register = () => {
 
   const handleClick = () => {
     AddUser(list);
+    setList(initialValues);
   };
 
   const handleChange = (e) => {

@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, push, set } from "firebase/database";
+import { getDatabase, onValue, ref, push, set, remove, update } from "firebase/database";
+import { useState, useEffect } from "react";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -28,6 +29,40 @@ export const AddUser = (list)=> {
     gender: list.gender
    
 });
+
+}
+
+export const useFetch=()=>{
+     const [isLoading,setIsLoading]=useState();
+     const [contactList,setContactList]=useState();
+    useEffect(() => {
+        const db = getDatabase(app);
+        const userRef=ref(db,"users/")
+        onValue(userRef,(snapshot)=>{
+            const data=snapshot.val();
+            const userArray=[]
+
+            for (let id in data){
+                userArray.push({id,...data[id]})
+            }
+            setContactList(userArray)
+            setIsLoading(false)
+        })
+    },[])
+    return {isLoading,contactList}
+}
+
+export const deleteUser=(id)=>{
+    const db = getDatabase(app);
+    remove(ref(db,"users/"+id));
+}
+
+export const UpdateUser=(list)=>{
+    const db = getDatabase(app);
+    const updates={}
+    updates["users/"+list.id]=list
+
+    return update(ref(db),updates)
 
 }
 

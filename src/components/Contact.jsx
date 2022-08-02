@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { RiDeleteBack2Fill } from "react-icons/ri";
 import { FaUserEdit } from "react-icons/fa";
+import { useFetch } from "../utils/firebase";
 
-const Contact = ({ list, setList }) => {
+const Contact = () => {
+  const { isLoading, contactList } = useFetch();
   return (
     <div className=" contact">
       <h1 className="text-success">Contact List</h1>
@@ -17,6 +19,40 @@ const Contact = ({ list, setList }) => {
           </tr>
         </thead>
         <tbody>
+          {isLoading ? (
+            <tr>
+              <td scope="row">Loading</td>
+            </tr>
+          ) : contactList?.length === 0 ? (
+            <tr>
+              <td scope="row">Result not found</td>
+            </tr>
+          ) : (
+            contactList?.map((item, index) => (
+              <tr>
+                <td scope="row">{item.username.toUpperCase()}</td>
+                <td>{item.phone}</td>
+                <td>{item.gender}</td>
+                <td className="delete" onClick={deleteUser(item.id)}>
+                  <RiDeleteBack2Fill />
+                </td>
+                <td
+                  scope="col-1"
+                  className="edit"
+                  onClick={() =>
+                    editUser(
+                      item.id,
+                      item.username,
+                      item.phoneNumber,
+                      item.gender
+                    )
+                  }
+                >
+                  <FaUserEdit />
+                </td>
+              </tr>
+            ))
+          )}
           {/* {list?.map((item) => {
             const { id, userName, phone, gender } = item;
             return (
