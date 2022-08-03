@@ -15,6 +15,8 @@ const Register = () => {
   //   const [show, setShow] = useState(true);
 
   const handleClick = () => {
+    if (!list.username || !list.phone || !list.gender)
+      return alert("Bitte richtig ausfüllen");
     if (list.id) {
       UpdateUser(list);
     } else {
