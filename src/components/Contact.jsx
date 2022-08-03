@@ -4,7 +4,8 @@ import { FaUserEdit } from "react-icons/fa";
 import { useFetch, DeleteUser } from "../utils/firebase";
 
 const Contact = ({ editUser }) => {
-  const { isLoading, contactList } = useFetch();
+  const { contactList } = useFetch();
+  //   console.log(contactList[0].id);
   return (
     <div className=" contact">
       <h1 className="text-success">Contact List</h1>
@@ -19,40 +20,25 @@ const Contact = ({ editUser }) => {
           </tr>
         </thead>
         <tbody>
-          {isLoading ? (
+          {contactList?.map((item, index) => (
             <tr>
-              <td scope="row">Loading</td>
+              <td scope="row">{item.username}</td>
+              <td>{item.phone}</td>
+              <td>{item.gender}</td>
+              <td className="delete" onClick={() => DeleteUser(item.id)}>
+                <RiDeleteBack2Fill />
+              </td>
+              <td
+                scope="col-1"
+                className="edit"
+                onClick={() =>
+                  editUser(item.id, item.username, item.phone, item.gender)
+                }
+              >
+                <FaUserEdit />
+              </td>
             </tr>
-          ) : contactList?.length === 0 ? (
-            <tr>
-              <td scope="row">Result not found</td>
-            </tr>
-          ) : (
-            contactList?.map((item, index) => (
-              <tr>
-                <td scope="row">{item.username.toUpperCase()}</td>
-                <td>{item.phone}</td>
-                <td>{item.gender}</td>
-                <td className="delete" onClick={DeleteUser(item.id)}>
-                  <RiDeleteBack2Fill />
-                </td>
-                <td
-                  scope="col-1"
-                  className="edit"
-                  onClick={() =>
-                    editUser(
-                      item.id,
-                      item.username,
-                      item.phoneNumber,
-                      item.gender
-                    )
-                  }
-                >
-                  <FaUserEdit />
-                </td>
-              </tr>
-            ))
-          )}
+          ))}
           {/* {list?.map((item) => {
             const { id, userName, phone, gender } = item;
             return (

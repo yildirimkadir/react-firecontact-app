@@ -24,7 +24,7 @@ export const AddUser = (list)=> {
     const userRef = ref(db, "users/");
     const newUserRef = push(userRef);
     set(newUserRef, {
-    username: list.userName,
+    username: list.username,
     phone: list.phone,
     gender: list.gender
    
@@ -33,7 +33,7 @@ export const AddUser = (list)=> {
 }
 
 export const useFetch=()=>{
-     const [isLoading,setIsLoading]=useState();
+    //  const [isLoading,setIsLoading]=useState();
      const [contactList,setContactList]=useState();
     useEffect(() => {
         const db = getDatabase(app);
@@ -46,10 +46,10 @@ export const useFetch=()=>{
                 userArray.push({id,...data[id]})
             }
             setContactList(userArray)
-            setIsLoading(false)
+            // setIsLoading(false)
         })
     },[])
-    return {isLoading,contactList}
+    return {contactList}
 }
 
 export const DeleteUser=(id)=>{

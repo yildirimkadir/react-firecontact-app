@@ -4,7 +4,7 @@ import { BsTelephoneFill } from "react-icons/bs";
 import Contact from "./Contact";
 import { AddUser, UpdateUser } from "../utils/firebase";
 
-const initialValues = { userName: "", phone: "", gender: "NO INFO" };
+const initialValues = { username: "", phone: "", gender: "NO INFO" };
 
 const Register = () => {
   //   const [userName, setUserName] = useState("");
@@ -15,19 +15,18 @@ const Register = () => {
   //   const [show, setShow] = useState(true);
 
   const handleClick = () => {
-    AddUser(list);
-    // if (list.id) {
-    //   UpdateUser(list);
-    // } else {
-
-    // }
+    if (list.id) {
+      UpdateUser(list);
+    } else {
+      AddUser(list);
+    }
 
     setList(initialValues);
     setIsAdd("Register");
   };
 
   const editUser = (id, username, phone, gender) => {
-    setIsAdd("UPDATE");
+    // setIsAdd("UPDATE");
     setList({ id, username, phone, gender });
   };
 
@@ -54,8 +53,8 @@ const Register = () => {
             placeholder="Username"
             aria-label="Username"
             aria-describedby="basic-addon1"
-            name="userName"
-            value={list.userName}
+            name="username"
+            value={list.username}
             onChange={handleChange}
           />
         </div>
@@ -66,7 +65,7 @@ const Register = () => {
             </span>
           </div>
           <input
-            type="text"
+            type="number"
             className="form-control outline-none"
             placeholder="Phone"
             aria-label="Phone"
